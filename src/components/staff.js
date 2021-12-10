@@ -13,37 +13,37 @@ import {
         Button} from 'reactstrap';
 import dateFormat from 'dateformat';
 
-class ListStaff extends Component {
+class ListStaff extends Component {                 // ListStaff Component để xử lý hiển thị thông tin nhân viên.
 
-    constructor(props) {
-        super(props);
-        this.state = { 
-            selectedStaff: null,
-            isOpen: false,
+    constructor(props) {                            //Thiết lập state cho component và nhận dữ liệu đc truyền từ App qua props.
+        super(props);                               //Sử dụng this.props trong phạm vi hàm constructor này.
+        this.state = {                              //Thiết lập state ban đầu cho component.
+            selectedStaff: null,                    //Thông tin nhân viên lúc đầu bằng "null".
+            isOpen: false,                          // Cờ ẩn/hiện thông tin nhân viên bằng false sẽ ẩn và ngược lại.
         };
-        this.onStaffSelected = this.onStaffSelected.bind(this);
+        this.onStaffSelected = this.onStaffSelected.bind(this);     // Hàm bind() dùng để gán dữ liệu vào đối tượng this của hàm đang dùng.
         this.hideInfo = this.hideInfo.bind(this);
     }
 
-    onStaffSelected(staff) {
-        this.setState({ 
-            selectedStaff: staff,
-            isOpen: !this.state.isOpen,
+    onStaffSelected(staff) {     // Khi có sự kiện onClick vào tên nhân viên sẽ gọi hàm này với tham số là thông tin nhân viên được click.
+        this.setState({          // Set state khi có sự kiện onClick vào tên nhân viên.
+            selectedStaff: staff,       // Set state selectedStaff bằng object chứa thông tin nhân viên đc click.
+            isOpen: !this.state.isOpen, // Set state isOpen bằng true để hiển thị thông tin nhân viên.
          });
     };
 
-    hideInfo() {
-        this.setState({ 
+    hideInfo() {                // Khi có sự kiện onClick vào button "Close" sẽ gọi hàm hideInfo.
+        this.setState({         // Set lại state isOpen = false để ẩn thông tin.
             isOpen: !this.state.isOpen,
         }); 
     };
 
-    renderInfo(staff) {
+    renderInfo(staff) {       // Hàm hiển thị chi tiết thông tin nhân viên được click với tham số truyền vào là thông tin nhân viên đó.
         if (staff != null) {
             let position = staff.salaryScale > 1 ? "Quản lý" : "Nhân viên";
-            let dateDoB = dateFormat(staff.doB, "dd/mm/yyyy");
+            let dateDoB = dateFormat(staff.doB, "dd/mm/yyyy");      // Định dạng thời gian theo dd/mm/yyyy.
             let dateStart = dateFormat(staff.startDate, "dd/mm/yyyy");
-            return (
+            return (            // Trả về thông tin nhân viên và cách hiển thị.
                 <Modal
                     fullscreen="true"
                     isOpen={this.state.isOpen}
@@ -93,15 +93,18 @@ class ListStaff extends Component {
         }
     };
 
-    render() {
-        const list = this.props.staffs.map((staff) => {
-            let role;
-            staff.salaryScale > 1 ? role = 'manager' : role = 'nomal';
-            return (
+    render() {      // Hàm render các element cần thiết của component.
+        const list = this.props.staffs.map((staff) => {         // Lặp qua danh sách nhân viên.
+            let role = staff.salaryScale > 1 ?  'manager' : 'nomal';
+            let apartment = staff.department.id === "Dept01" ? 'dept01' : 
+                            staff.department.id === "Dept02" ? 'antiquewhite' : 
+                            staff.department.id === "Dept03" ? 'aqua' : 
+                            staff.department.id === "Dept04" ? 'aquamarine' : 'yellow';
+            return (        // Trả dữ liệu về cho hàm map().
                 <div key={staff.id} className="col-12 col-md-6 col-lg-4 staff">
-                    <Card id={staff.id} className={role} onClick={() => this.onStaffSelected(staff)}>
+                    <Card id={staff.id} className={apartment} onClick={() => this.onStaffSelected(staff)}>
                         <CardBody>
-                            <CardTitle tag="p">
+                            <CardTitle tag="p" className={role}>
                                 {staff.name}
                             </CardTitle>
                         </CardBody>
@@ -109,7 +112,7 @@ class ListStaff extends Component {
                 </div>
             )
         });
-        return (
+        return (        // Trả dữ liệu về cho hàm render() để hiển thị ra màn hình.
             <div>
                 <Navbar dark color="primary">
                     <div className="container">
@@ -118,12 +121,42 @@ class ListStaff extends Component {
                         </NavbarBrand>
                     </div>
                 </Navbar>
-                <div className="container">
+                <div className="container container-content">
+                    <h5 className="staff-detail">(Bấm vào tên nhân viên để xem thông tin chi tiết)</h5>  
                     <div className="row">
                         {list}
                     </div>
+                    <div className="row">
+                        <div className="col-md-6 detail">
+                            <p>Chú thích:</p>
+                            <ul>
+                                <li className="manager">Quản lý</li>
+                                <li className="nomal">Nhân viên</li>
+                                <li>
+                                    <span className="info-detail sale"></span>
+                                    <span className="info-department">- Sale Department</span>
+                                </li>
+                                <li>
+                                    <span className="info-detail hr"></span>
+                                    <span className="info-department">- HR Department</span>
+                                </li>
+                                <li>
+                                    <span className="info-detail marketing"></span>
+                                    <span className="info-department">- Marketing Department</span>
+                                </li>
+                                <li>
+                                    <span className="info-detail it"></span>
+                                    <span className="info-department">- IT Department</span>
+                                </li>
+                                <li>
+                                    <span className="info-detail finance"></span> 
+                                    <span className="info-department">- Finance Department</span>  
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                {this.renderInfo(this.state.selectedStaff)}
+                {this.renderInfo(this.state.selectedStaff)} 
             </div>
         );
     }

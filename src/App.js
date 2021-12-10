@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { STAFFS } from './shared/staffs';
+import { STAFFS } from './shared/staffs';   
 import ListStaff from './components/staff';
 class App extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class App extends Component {
   }
   render() {
     return (
-      <ListStaff staffs= {this.state.staffs} />
+      <ListStaff staffs= {this.state.staffs} /> // Truyền vào component ListStaff danh sách nhân viên.
     );
   }
 }

@@ -13,30 +13,70 @@ code {
     monospace;
 }
 
+.container-content {
+  border: 1px solid black;
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 0 3px black;
+}
+
+.row {
+  padding-top: 10px;
+}
+
+.staff-detail {
+  text-align: center;
+  font-family: serif;
+  font-style: italic;
+}
+
 .staff {
-  padding: 10px;
+  padding: 6px;
 }
 
 .manager {
-  background-color: aquamarine;
-}
-
-.manager:hover,
-.nomal:hover {
-  opacity: 0.8;
+  color: blue;
 }
 
 .nomal {
-  background-color: bisque;
+  color: black;
+}
+
+.dept01 {
+  background-color: #b0c9df;
+}
+
+.antiquewhite {
+  background-color: antiquewhite;
+}
+
+.aqua {
+  background-color: aqua;
+}
+
+.aquamarine {
+  background-color: aquamarine;
+}
+
+.yellow {
+  background-color: yellow;
+}
+.card:hover {
+  box-shadow: 0 0 3px black;
 }
 
 .card-body {
-  padding: 1em;
+  padding: 3px;
+  text-align: center;
 }
 
 .card-body p {
   margin: 0;
   cursor: default;
+}
+
+.card-title {
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .modal-dialog {
@@ -90,4 +130,44 @@ h5 {
 .info-title {
   display: inline-block;
   min-width: 20%;
+}
+
+.detail {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+ul li {
+  list-style-type: none;
+  position: relative;
+}
+
+.info-department {
+  position: absolute;
+  top: -3px;
+}
+
+.info-detail {
+  display: inline-block;
+  width: 10%;
+  height: 20px;
+}
+
+.sale {
+  background-color: #b0c9df;
+}
+
+.hr {
+  background-color: antiquewhite;
+}
+
+.marketing {
+  background-color: aqua;
+}
+
+.it {
+  background-color: aquamarine;
+}
+
+.finance {
+  background-color: yellow;
 }
