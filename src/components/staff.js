@@ -124,44 +124,6 @@ class ListStaff extends Component {
                     </div>
                 </div>
                 {this.renderInfo(this.state.selectedStaff)}
-                {/* <Modal
-                    fullscreen="true"
-                    isOpen={this.state.isOpen}
-                >
-                    <ModalHeader>
-                    Thông tin nhân viên
-                    </ModalHeader>
-                    <ModalBody className="row">
-                        <div className="img-container col-3">
-                            <CardImg
-                            alt="Card image cap"
-                            src="https://picsum.photos/318/180"
-                            max-width="100%"
-                            />
-                        </div>
-                        <div className="info-container col-9">
-                            <h4>Họ và tên: Nguyễn Văn A</h4>
-                            <hr/>
-                            <p>Ngày sinh: 01/01/2000</p>
-                            <hr/>
-                            <p>Ngày vào công ty: 09/11/2020</p>
-                            <hr/>
-                            <p>Phòng ban: 09/11/2020</p>
-                            <hr/>
-                            <p>Số ngày nghỉ còn lại: 09/11/2020</p>
-                            <hr/>
-                            <p>Số ngày đã làm thêm: 09/11/2020</p>
-                        </div>
-                    </ModalBody>
-                    <ModalFooter>
-                    <Button
-                        color="primary"
-                        onClick={this.hideInfo}
-                    >
-                        Close
-                    </Button>
-                    </ModalFooter>
-                </Modal> */}
             </div>
         );
     }
