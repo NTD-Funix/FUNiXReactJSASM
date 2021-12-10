@@ -202,7 +202,7 @@ export const STAFFS =
             name: "Nguyễn Văn F",
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
-            startDate: "2019-04-30T08:59:00.000Z",
+            startDate: "2020-05-28T08:59:00.000Z",
             department: DEPARTMENTS[4],
             annualLeave: 9,
             overTime: 10,

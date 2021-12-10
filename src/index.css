@@ -27,6 +27,7 @@ code {
 
 .card-body p {
   margin: 0;
+  cursor: default;
 }
 
 .modal-dialog {
@@ -45,19 +46,21 @@ code {
 
 .img-container {
   text-align: center;
-  padding-bottom: 1rem;
 }
 
 .img-container img {
-  width: 200px;
-  height: 200px;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 3px;
+  box-shadow: 0 0 3px black;
 }
 
 .info-container {
   padding: 10px;
   border: 1px solid black;
   border-radius: 3px;
-  box-shadow: 1px 1px 1px black;
+  box-shadow: 0 0 3px black;
 }
 
 .info-container p {

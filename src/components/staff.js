@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Navbar, NavbarBrand, Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap';
+import { 
+        Card, 
+        CardImg, 
+        CardBody, 
+        CardTitle, 
+        Navbar, 
+        NavbarBrand,
+        Modal, 
+        ModalHeader, 
+        ModalBody, 
+        ModalFooter, 
+        Button} from 'reactstrap';
+import dateFormat from 'dateformat';
 
 class ListStaff extends Component {
 
@@ -24,7 +36,60 @@ class ListStaff extends Component {
         this.setState({ 
             isOpen: !this.state.isOpen,
         }); 
-    }
+    };
+
+    renderInfo(staff) {
+        if (staff != null) {
+            console.log(staff);
+            let dateDoB = dateFormat(staff.doB, "dd/mm/yyyy");
+            let dateStart = dateFormat(staff.startDate, "dd/mm/yyyy");
+            console.log(dateDoB, dateStart)
+            return (
+                <Modal
+                    fullscreen="true"
+                    isOpen={this.state.isOpen}
+                >
+                    <ModalHeader tag="h3">
+                    Thông tin nhân viên
+                    </ModalHeader>
+                    <ModalBody className="row">
+                        <div className="img-container col-3">
+                            <CardImg
+                            alt={staff.name}
+                            src={staff.image}
+                            />
+                        </div>
+                        <div className="info-container col-9">
+                            <h4>Họ và tên: {staff.name}</h4>
+                            <hr/>
+                            <p>Ngày sinh: {dateDoB}</p>
+                            <hr/>
+                            <p>Ngày vào công ty: {dateStart}</p>
+                            <hr/>
+                            <p>Phòng ban: {staff.department.name}</p>
+                            <hr/>
+                            <p>Số ngày nghỉ còn lại: {staff.annualLeave}</p>
+                            <hr/>
+                            <p>Số ngày đã làm thêm: {staff.overTime}</p>
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>
+                    <Button
+                        color="primary"
+                        onClick={this.hideInfo}
+                    >
+                        Close
+                    </Button>
+                    </ModalFooter>
+                </Modal>
+            );
+        }
+        else {
+            return (
+                <div></div>
+            )
+        }
+    };
 
     render() {
         const list = this.props.staffs.map((staff) => {
@@ -54,7 +119,8 @@ class ListStaff extends Component {
                         {list}
                     </div>
                 </div>
-                <Modal
+                {this.renderInfo(this.state.selectedStaff)}
+                {/* <Modal
                     fullscreen="true"
                     isOpen={this.state.isOpen}
                 >
@@ -91,7 +157,7 @@ class ListStaff extends Component {
                         Close
                     </Button>
                     </ModalFooter>
-                </Modal>
+                </Modal> */}
             </div>
         );
     }
