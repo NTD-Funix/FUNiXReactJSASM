@@ -133,7 +133,13 @@ h5 {
 }
 
 .detail {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: auto;
+  border-top: 1px solid black;
+  margin-top: 20px;
+}
+
+ul {
+  padding-left: 20px;
 }
 
 ul li {

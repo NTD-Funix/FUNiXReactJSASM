@@ -20,9 +20,11 @@ class ListStaff extends Component {                 // ListStaff Component để
         this.state = {                              //Thiết lập state ban đầu cho component.
             selectedStaff: null,                    //Thông tin nhân viên lúc đầu bằng "null".
             isOpen: false,                          // Cờ ẩn/hiện thông tin nhân viên bằng false sẽ ẩn và ngược lại.
+            sortValue: "4"
         };
         this.onStaffSelected = this.onStaffSelected.bind(this);     // Hàm bind() dùng để gán dữ liệu vào đối tượng this của hàm đang dùng.
         this.hideInfo = this.hideInfo.bind(this);
+        this.onSort = this.onSort.bind(this);
     }
 
     onStaffSelected(staff) {     // Khi có sự kiện onClick vào tên nhân viên sẽ gọi hàm này với tham số là thông tin nhân viên được click.
@@ -37,6 +39,20 @@ class ListStaff extends Component {                 // ListStaff Component để
             isOpen: !this.state.isOpen,
         }); 
     };
+
+    onSort(e) {
+        this.setState({
+            sortValue: e.target.value,
+        })
+    }
+
+    componentDidMount() {
+        
+    }
+
+    componentDidUpdate() {
+        
+    }
 
     renderInfo(staff) {       // Hàm hiển thị chi tiết thông tin nhân viên được click với tham số truyền vào là thông tin nhân viên đó.
         if (staff != null) {
@@ -94,6 +110,11 @@ class ListStaff extends Component {                 // ListStaff Component để
     };
 
     render() {      // Hàm render các element cần thiết của component.
+        let sortClass = this.state.sortValue === "2" ? "col-2 col-md-2 col-lg-2 staff" :
+                        this.state.sortValue === "3" ? "col-3 col-md-3 col-lg-3 staff" :
+                        this.state.sortValue === "4" ? "col-4 col-md-4 col-lg-4 staff" :
+                        "col-6 col-md-6 col-lg-6 staff"
+        console.log(this.state.sortValue)
         const list = this.props.staffs.map((staff) => {         // Lặp qua danh sách nhân viên.
             let role = staff.salaryScale > 1 ?  'manager' : 'nomal';
             let apartment = staff.department.id === "Dept01" ? 'dept01' : 
@@ -101,7 +122,7 @@ class ListStaff extends Component {                 // ListStaff Component để
                             staff.department.id === "Dept03" ? 'aqua' : 
                             staff.department.id === "Dept04" ? 'aquamarine' : 'yellow';
             return (        // Trả dữ liệu về cho hàm map().
-                <div key={staff.id} className="col-12 col-md-6 col-lg-4 staff">
+                <div key={staff.id} className={sortClass}>
                     <Card id={staff.id} className={apartment} onClick={() => this.onStaffSelected(staff)}>
                         <CardBody>
                             <CardTitle tag="p" className={role}>
@@ -126,8 +147,8 @@ class ListStaff extends Component {                 // ListStaff Component để
                     <div className="row">
                         {list}
                     </div>
-                    <div className="row">
-                        <div className="col-md-6 detail">
+                    <div className="row detail">
+                        <div className="col-12 col-md-6 detail-comment">
                             <p>Chú thích:</p>
                             <ul>
                                 <li className="manager">Quản lý</li>
@@ -153,6 +174,19 @@ class ListStaff extends Component {                 // ListStaff Component để
                                     <span className="info-department">- Finance Department</span>  
                                 </li>
                             </ul>
+                        </div>
+                        <div className="col-12 col-md-6 detail-sort">
+                            <label htmlFor="sort">Sắp xếp theo:</label>
+                            {' '}
+                            <select 
+                                name="sort" 
+                                id="sort"
+                                onChange={this.onSort}>
+                                <option value="4">Sắp xếp theo 3 cột</option>
+                                <option value="2">Sắp xếp theo 6 cột</option>
+                                <option value="3">Sắp xếp theo 4 cột</option>
+                                <option value="6">Sắp xếp theo 2 cột</option>
+                            </select>
                         </div>
                     </div>
                 </div>
