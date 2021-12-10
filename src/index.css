@@ -53,6 +53,10 @@ code {
   padding-right: 10px;
 }
 
+.modal-footer button {
+  min-width: 30%;
+}
+
 .img-container {
   text-align: center;
 }

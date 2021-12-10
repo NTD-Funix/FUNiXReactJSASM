@@ -40,12 +40,9 @@ class ListStaff extends Component {
 
     renderInfo(staff) {
         if (staff != null) {
-            console.log(staff.salaryScale);
             let position = staff.salaryScale > 1 ? "Quản lý" : "Nhân viên";
-            console.log(position);
             let dateDoB = dateFormat(staff.doB, "dd/mm/yyyy");
             let dateStart = dateFormat(staff.startDate, "dd/mm/yyyy");
-            console.log(dateDoB, dateStart)
             return (
                 <Modal
                     fullscreen="true"
@@ -79,7 +76,8 @@ class ListStaff extends Component {
                     </ModalBody>
                     <ModalFooter>
                     <Button
-                        color="primary"
+                        color="danger"
+                        outline
                         onClick={this.hideInfo}
                     >
                         Close
