@@ -40,7 +40,9 @@ class ListStaff extends Component {
 
     renderInfo(staff) {
         if (staff != null) {
-            console.log(staff);
+            console.log(staff.salaryScale);
+            let position = staff.salaryScale > 1 ? "Quản lý" : "Nhân viên";
+            console.log(position);
             let dateDoB = dateFormat(staff.doB, "dd/mm/yyyy");
             let dateStart = dateFormat(staff.startDate, "dd/mm/yyyy");
             console.log(dateDoB, dateStart)
@@ -53,24 +55,26 @@ class ListStaff extends Component {
                     Thông tin nhân viên
                     </ModalHeader>
                     <ModalBody className="row">
-                        <div className="img-container col-3">
+                        <div className="img-container col-md-3">
                             <CardImg
                             alt={staff.name}
                             src={staff.image}
                             />
                         </div>
-                        <div className="info-container col-9">
-                            <h4>Họ và tên: {staff.name}</h4>
+                        <div className="info-container col-md-9">
+                            <h4><span className="info-title">Họ và tên</span>{' : '}{staff.name}</h4>
                             <hr/>
-                            <p>Ngày sinh: {dateDoB}</p>
+                            <h5><span className="info-title">Vị trí</span>{' : '}{position}</h5>
                             <hr/>
-                            <p>Ngày vào công ty: {dateStart}</p>
+                            <p><span className="info-title">Ngày sinh</span>{' : '}{dateDoB}</p>
                             <hr/>
-                            <p>Phòng ban: {staff.department.name}</p>
+                            <p><span className="info-title">Ngày vào công ty</span>{' : '}{dateStart}</p>
                             <hr/>
-                            <p>Số ngày nghỉ còn lại: {staff.annualLeave}</p>
+                            <p><span className="info-title">Phòng ban</span>{' : '}{staff.department.name}</p>
                             <hr/>
-                            <p>Số ngày đã làm thêm: {staff.overTime}</p>
+                            <p><span className="info-title">Số ngày nghỉ còn lại</span>{' : '}{staff.annualLeave}</p>
+                            <hr/>
+                            <p><span className="info-title">Số ngày đã làm thêm</span>{' : '}{staff.overTime}</p>
                         </div>
                     </ModalBody>
                     <ModalFooter>
@@ -93,9 +97,11 @@ class ListStaff extends Component {
 
     render() {
         const list = this.props.staffs.map((staff) => {
+            let role;
+            staff.salaryScale > 1 ? role = 'manager' : role = 'nomal';
             return (
                 <div key={staff.id} className="col-12 col-md-6 col-lg-4 staff">
-                    <Card id={staff.id}  onClick={() => this.onStaffSelected(staff)}>
+                    <Card id={staff.id} className={role} onClick={() => this.onStaffSelected(staff)}>
                         <CardBody>
                             <CardTitle tag="p">
                                 {staff.name}

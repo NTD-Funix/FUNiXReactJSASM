@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import { DEPARTMENTS, ROLE, STAFFS } from './shared/staffs';
+import { STAFFS } from './shared/staffs';
 import ListStaff from './components/staff';
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      staffs: STAFFS,
-      role: ROLE,
-      departments: DEPARTMENTS
+      staffs: STAFFS
     }
   }
   render() {
     return (
-      <ListStaff staffs= {this.state.staffs} />
+      <ListStaff staffs= {this.state.staffs} role={this.state.role}/>
     );
   }
 }

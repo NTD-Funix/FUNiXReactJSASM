@@ -17,8 +17,17 @@ code {
   padding: 10px;
 }
 
-.card:hover {
+.manager {
   background-color: aquamarine;
+}
+
+.manager:hover,
+.nomal:hover {
+  opacity: 0.8;
+}
+
+.nomal {
+  background-color: bisque;
 }
 
 .card-body {
@@ -31,7 +40,7 @@ code {
 }
 
 .modal-dialog {
-  max-width: 90% !important;
+  max-width: 83% !important;
   height: auto;
 }
 
@@ -61,8 +70,20 @@ code {
   border: 1px solid black;
   border-radius: 3px;
   box-shadow: 0 0 3px black;
+  font-family: serif;
+  font-size: 20px;
+}
+
+.info-container h4,
+h5 {
+  font-weight: bold;
 }
 
 .info-container p {
   margin: 0;
+}
+
+.info-title {
+  display: inline-block;
+  min-width: 20%;
 }
