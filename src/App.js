@@ -10,7 +10,7 @@ class App extends Component {
   }
   render() {
     return (
-      <ListStaff staffs= {this.state.staffs} role={this.state.role}/>
+      <ListStaff staffs= {this.state.staffs} />
     );
   }
 }
