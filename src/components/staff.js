@@ -110,11 +110,10 @@ class ListStaff extends Component {                 // ListStaff Component để
     };
 
     render() {      // Hàm render các element cần thiết của component.
-        let sortClass = this.state.sortValue === "2" ? "col-2 col-md-2 col-lg-2 staff" :
+        let sortClass = this.state.sortValue === "2" ? "col-2 col-md-2 col-lg-2 staff" :  
                         this.state.sortValue === "3" ? "col-3 col-md-3 col-lg-3 staff" :
                         this.state.sortValue === "4" ? "col-4 col-md-4 col-lg-4 staff" :
                         "col-6 col-md-6 col-lg-6 staff"
-        console.log(this.state.sortValue)
         const list = this.props.staffs.map((staff) => {         // Lặp qua danh sách nhân viên.
             let role = staff.salaryScale > 1 ?  'manager' : 'nomal';
             let apartment = staff.department.id === "Dept01" ? 'dept01' : 
