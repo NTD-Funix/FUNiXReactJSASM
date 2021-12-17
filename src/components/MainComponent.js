@@ -17,8 +17,8 @@ class Main extends Component {
     }
 
     render() {
-        let dishes = this.state.dishes;
-        let dish = dishes.find((dish) =>  dish.id === this.state.selectedDish);
+        const dishes = this.state.dishes;
+        const dish = dishes.find((dish) =>  dish.id === this.state.selectedDish);
         return (
           <div>
             <Navbar dark color="primary">
