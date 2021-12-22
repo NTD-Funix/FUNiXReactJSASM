@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
-// import Dishdetail from './DishdetailComponent';
+import Dishdetail from './DishdetailComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { DISHES } from '../shared/dishes';
@@ -23,7 +23,6 @@ class Main extends Component {
 
     render() {
         const dishes = this.state.dishes;
-        // const dish = dishes.find((dish) =>  dish.id === this.state.selectedDish);
         const HomePage = () => {
             return(
               <Home dish={this.state.dishes.filter((dish) => dish.featured)[0]}
@@ -31,6 +30,14 @@ class Main extends Component {
                     leader={this.state.leaders.filter((leader) => leader.featured)[0]}
               />
             );
+        };
+
+        const DishWithId = ({match}) => {
+          return(
+            <Dishdetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
+                        comments={this.state.comments.filter((comments) => comments.dishId === parseInt(match.params.dishId, 10))}
+            />
+          );
         }
 
         return (
@@ -40,6 +47,7 @@ class Main extends Component {
               <Switch>
                 <Route path="/home" component={HomePage} /> 
                 <Route exact path="/menu" component={() => <Menu dishes={dishes}/>}/>
+                <Route path="/menu/:dishId" component={DishWithId} />
                 <Route exact path="/contactus" component={Contact} />
                 <Redirect to="/home" />
               </Switch>
