@@ -8,22 +8,22 @@ export const DEPARTMENTS =
         {
             id: "Dept02",
             name: "HR",
-            numberOfStaff: 3
+            numberOfStaff: 1
         },
         {
             id: "Dept03",
             name: "Marketing",
-            numberOfStaff: 2
+            numberOfStaff: 3
         },
         {
             id: "Dept04",
             name: "IT",
-            numberOfStaff: 1
+            numberOfStaff: 9
         },
         {
             id: "Dept05",
             name: "Finance",
-            numberOfStaff: 11
+            numberOfStaff: 7
         }
     ]
 export const ROLE = {

@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { STAFFS } from './shared/staffs';   
-import ListStaff from './components/staff';
+import Main from './components/MainComponent';
+import { BrowserRouter } from 'react-router-dom';
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      staffs: STAFFS
-    }
-  }
   render() {
     return (
-      <ListStaff staffs= {this.state.staffs} /> // Truyền vào component ListStaff danh sách nhân viên.
+      <BrowserRouter>
+        <Main />
+      </BrowserRouter>
     );
   }
 }
