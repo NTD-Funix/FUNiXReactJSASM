@@ -11,7 +11,7 @@ function RenderStaffOfDep({item}) {
     return(
         <Card id={item.id} className="Dept01">
             <CardBody>
-                <CardImg src={item.image}/>
+                <CardImg src={item.image} alt={item.name}/>
                 <CardTitle tag="p" className={department}>
                     {item.name}
                 </CardTitle>

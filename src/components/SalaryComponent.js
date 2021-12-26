@@ -1,5 +1,8 @@
 import React from 'react';
-import {Card, CardBody, CardTitle, CardText, InputGroup, InputGroupText, Input, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Card, CardBody, CardTitle, CardText, 
+        InputGroup, InputGroupText, Input, 
+        Breadcrumb, BreadcrumbItem,
+        FormGroup, Label, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function RenderStaff ({item}) {
@@ -27,6 +30,11 @@ function RenderStaff ({item}) {
 };
 
 function Home(props) {
+
+    function abc(e) {
+        console.log(e.target.value)
+    }
+
     const list = props.staffs.map((staff) => {
         return (
         <div className="col-12 col-md-6 col-lg-4 staff">
@@ -46,11 +54,27 @@ function Home(props) {
             </div>
             <hr/>
             <div className="row">
-                <div className="col-6">
+                <div className="col-12 col-md-6 m-auto">
                     <h3>Bảng lương</h3>
                 </div>
-                <div className="col-6">
-                    1111
+                <div className="col-12 col-md-6 m-auto">
+                    <FormGroup row>
+                        <Label for="exampleSelect" sm={12} md={4} lg={3}>
+                            Sắp xếp theo: 
+                        </Label>
+                        <Col sm={12} md={8} lg={9}>
+                            <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            onChange={abc}
+                            >
+                                <option value="staffId"> Mã nhân viên</option>
+                                <option value="lowToHigh">Mức lương tăng dần</option>
+                                <option value="highToLow">Mức lương giảm dần</option>
+                            </Input>
+                        </Col>
+                    </FormGroup>
                 </div>
             </div>
             <hr/>
