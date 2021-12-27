@@ -22,7 +22,6 @@ function RenderDepartment({item}) {
 }
 
 function Department(props) {
-    console.log(props)
     const departmentList = props.departments.map((department) => {
         return (
         <div key={department.id} className="col-12 col-md-6 col-lg-4 staff">

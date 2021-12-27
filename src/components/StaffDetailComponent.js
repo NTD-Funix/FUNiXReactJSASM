@@ -19,31 +19,31 @@ function RenderStaff({staff}) {
             <div className="col-12 col-md-8 col-lg-9 p-3">
                     <div className="input-group mb-1">
                         <span className="input-group-text">Họ và tên</span>
-                        <input type="text" class="form-control" placeholder="Username" name="usrname" value={staff.name} disabled />
+                        <input type="text" className="form-control" placeholder="Username" name="usrname" value={staff.name} disabled />
                     </div>
                     <div className="input-group mb-1">
                         <span className="input-group-text">Vị trí</span>
-                        <input type="text" class="form-control" value={position} disabled />
+                        <input type="text" className="form-control" value={position} disabled />
                     </div>
                     <div className="input-group mb-1">
                         <span className="input-group-text">Ngày sinh</span>
-                        <input type="text" class="form-control" value={doB} disabled />
+                        <input type="text" className="form-control" value={doB} disabled />
                     </div>
                     <div className="input-group mb-1">
                         <span className="input-group-text">Ngày vào công ty</span>
-                        <input type="text" class="form-control" value={startDate} disabled />
+                        <input type="text" className="form-control" value={startDate} disabled />
                     </div>
                     <div className="input-group mb-1">
                         <span className="input-group-text">Phòng ban</span>
-                        <input type="text" class="form-control" value={staff.department.name} disabled />
+                        <input type="text" className="form-control" value={staff.department.name} disabled />
                     </div>
                     <div className="input-group mb-1">
                         <span className="input-group-text">Số ngày nghỉ còn lại</span>
-                        <input type="text" class="form-control" value={staff.annualLeave} disabled />
+                        <input type="text" className="form-control" value={staff.annualLeave} disabled />
                     </div>
                     <div className="input-group mb-1">
                         <span className="input-group-text">Số ngày đã làm thêm</span>
-                        <input type="text" class="form-control" value={staff.overTime} disabled />
+                        <input type="text" className="form-control" value={staff.overTime} disabled />
                     </div>
             </div>
         </div>
