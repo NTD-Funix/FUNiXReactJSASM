@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
+import Staffs from './StaffsComponent';
 import StaffDetail from './StaffDetailComponent';
 import Department from './DepartmentComponent';
 import StaffOfDepartment from './StaffOfDepartmentComponent';
 import Salary from './SalaryComponent';
 import Footer from './FooterComponent';
-import { STAFFS, DEPARTMENTS } from '../shared/staffs';   
+import { STAFFS, DEPARTMENTS, IMAGE } from '../shared/staffs';   
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 class Main extends Component {                 
@@ -15,7 +16,8 @@ class Main extends Component {
         super(props);      
         this.state = {           
             staffs: STAFFS,
-            departments: DEPARTMENTS    
+            departments: DEPARTMENTS  ,
+            image: IMAGE  
         };
     }
 
@@ -38,17 +40,16 @@ class Main extends Component {
         return (        
             <div>
                 <Header/>
-                <div className="container container-content">
                     <Switch>
-                        <Route exact path="/staffs" component={() => <Home staffs={this.state.staffs}/>} />
+                        <Route exact path="/home" component={() =><Home image={this.state.image} />} />
+                        <Route exact path="/staffs" component={() => <Staffs staffs={this.state.staffs}/>} />
                         <Route path="/staffs/:staffId" component={StaffWithId} />
                         <Route exact path="/departments" 
                             component={() => <Department departments={this.state.departments}/>} /> 
                         <Route path="/departments/:departmentId" component={StaffOfDept}/> 
                         <Route exact path="/salary" component={() => <Salary staffs={this.state.staffs}/>}/> 
-                        <Redirect to='/staffs'/>
+                        <Redirect to='/home'/>
                     </Switch>
-                </div>
                 <Footer/>
             </div>
         );

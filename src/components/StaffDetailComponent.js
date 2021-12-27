@@ -54,7 +54,7 @@ const StaffDetail = (props) => {
     let staff = props.staff;
     if (staff != null) {
         return(
-            <div className="container">
+            <div className="container container-content">
                 <div className="row">
                     <Breadcrumb>
                         <BreadcrumbItem>

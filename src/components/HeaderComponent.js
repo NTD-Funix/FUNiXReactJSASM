@@ -36,11 +36,11 @@ class Header extends Component {
                                 <NavItem>
                                     <NavLink className='nav-link' to='/salary'><span className='fa fa-money fa-lg'></span> Bảng lương</NavLink>
                                 </NavItem>
-                                <NavItem>
-                                    <NavLink className='nav-link' to='/about'><span className='fa fa-info fa-lg'></span> About</NavLink>
-                                </NavItem>
                             </Nav>
                         </Collapse>
+                        <NavbarBrand className='mr-auto' href="/">
+                            <h5>Ứng dụng quản lý nhân sự V1.0</h5>
+                        </NavbarBrand>
                     </div>
                 </Navbar>
             </React.Fragment>

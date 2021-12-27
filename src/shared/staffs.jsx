@@ -1,29 +1,40 @@
+export const IMAGE = {
+        id: 0,
+        img: '/assets/images/background4.png',
+        name: "background"
+    }
+
 export const DEPARTMENTS =
     [
         {
             id: "Dept01",
             name: "Sale",
-            numberOfStaff: 1
+            numberOfStaff: 1,
+            image: '/assets/images/sale-department.png'
         },
         {
             id: "Dept02",
             name: "HR",
-            numberOfStaff: 1
+            numberOfStaff: 1,
+            image: '/assets/images/hr-department.jpg'
         },
         {
             id: "Dept03",
             name: "Marketing",
-            numberOfStaff: 3
+            numberOfStaff: 3,
+            image: '/assets/images/marketing-department.jpg'
         },
         {
             id: "Dept04",
             name: "IT",
-            numberOfStaff: 9
+            numberOfStaff: 9,
+            image: '/assets/images/it-department.png'
         },
         {
             id: "Dept05",
             name: "Finance",
-            numberOfStaff: 7
+            numberOfStaff: 7,
+            image: '/assets/images/finance-department.jpg'
         }
     ]
 export const ROLE = {
@@ -34,7 +45,7 @@ export const STAFFS =
     [
         {
             id: 0,
-            name: "Nguyễn Văn A",
+            name: "Bùi Văn A",
             doB: "1999-01-01T08:59:00.000Z",
             salaryScale: 1.1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -56,7 +67,7 @@ export const STAFFS =
         },
         {
             id: 2,
-            name: "Nguyễn Văn C",
+            name: "Hà Văn C",
             doB: "2001-01-01T08:59:00.000Z",
             salaryScale: 1.3,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -78,24 +89,24 @@ export const STAFFS =
         },
         {
             id: 4,
-            name: "Nguyễn Văn E",
+            name: "Mai Đức E",
             doB: "1999-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[2],
             annualLeave: 8,
-            overTime: 1,
+            overTime: 2,
             image: '/assets/images/alberto.png',
         },
         {
             id: 5,
-            name: "Nguyễn Văn A",
+            name: "Mai Duy A",
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[3],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 4,
             image: '/assets/images/alberto.png',
         },
         {
@@ -106,7 +117,7 @@ export const STAFFS =
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[3],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 6,
             image: '/assets/images/alberto.png',
         },
         {
@@ -117,7 +128,7 @@ export const STAFFS =
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[2],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 8,
             image: '/assets/images/alberto.png',
         },
         {
@@ -139,7 +150,7 @@ export const STAFFS =
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[3],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 9,
             image: '/assets/images/alberto.png',
         },
         {
@@ -150,7 +161,7 @@ export const STAFFS =
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[4],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 11,
             image: '/assets/images/alberto.png',
         },
         {
@@ -161,7 +172,7 @@ export const STAFFS =
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[4],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 13,
             image: '/assets/images/alberto.png',
         },
         {
@@ -172,7 +183,7 @@ export const STAFFS =
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[3],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 12,
             image: '/assets/images/alberto.png',
         },
         {
@@ -183,7 +194,7 @@ export const STAFFS =
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[3],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 14,
             image: '/assets/images/alberto.png',
         },
         {
@@ -194,7 +205,7 @@ export const STAFFS =
             startDate: "2019-04-30T08:59:00.000Z",
             department: DEPARTMENTS[4],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 16,
             image: '/assets/images/alberto.png',
         },
         {
@@ -205,7 +216,7 @@ export const STAFFS =
             startDate: "2020-05-28T08:59:00.000Z",
             department: DEPARTMENTS[4],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 18,
             image: '/assets/images/alberto.png',
         },
         {
@@ -216,7 +227,7 @@ export const STAFFS =
             startDate: "2019-05-28T08:59:00.000Z",
             department: DEPARTMENTS[3],
             annualLeave: 8,
-            overTime: 8,
+            overTime: 15,
             image: '/assets/images/alberto.png',
         },
         {
@@ -227,7 +238,7 @@ export const STAFFS =
             startDate: "2020-05-28T08:59:00.000Z",
             department: DEPARTMENTS[4],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 17,
             image: '/assets/images/alberto.png',
         },
         {
@@ -238,7 +249,7 @@ export const STAFFS =
             startDate: "2020-05-28T08:59:00.000Z",
             department: DEPARTMENTS[3],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 20,
             image: '/assets/images/alberto.png',
         },
         {
@@ -249,7 +260,7 @@ export const STAFFS =
             startDate: "2020-05-28T08:59:00.000Z",
             department: DEPARTMENTS[4],
             annualLeave: 9,
-            overTime: 10,
+            overTime: 19,
             image: '/assets/images/alberto.png',
         },
         {
@@ -260,7 +271,7 @@ export const STAFFS =
             startDate: "2019-05-28T08:59:00.000Z",
             department: DEPARTMENTS[4],
             annualLeave: 9,
-            overTime: 8,
+            overTime: 22,
             image: '/assets/images/alberto.png',
         },
     ]

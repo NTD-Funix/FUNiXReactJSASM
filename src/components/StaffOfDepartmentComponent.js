@@ -24,13 +24,13 @@ function RenderStaffOfDep({item}) {
 function StaffOfDepartment(props) {
     const list = props.items.map((item) => {
         return (
-        <div className="col-6 col-md-4 col-lg-2 staff">
+        <div key={item.id} className="col-6 col-md-4 col-lg-2 staff">
             <RenderStaffOfDep item={item} />
         </div>
         );
     })
     return(
-        <div>
+        <div className="container container-content">
             <div className="row">
                 <Breadcrumb>
                     <BreadcrumbItem>

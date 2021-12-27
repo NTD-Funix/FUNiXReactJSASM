@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardBody, CardTitle, CardText} from 'reactstrap';
+import {Card, CardBody, CardTitle, CardText, CardImg} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 function RenderDepartment({item}) {
@@ -11,6 +11,7 @@ function RenderDepartment({item}) {
         <Link to={`/departments/${item.id}`}>
             <Card className={department}>
                 <CardBody>
+                    <CardImg src={item.image} alt={item.name} className="departmentImg"/>
                     <CardTitle>{item.name} Department</CardTitle>
                     <CardTitle>ID: {item.id}</CardTitle>
                     <CardText>Số lượng nhân viên: {item.numberOfStaff}</CardText>
@@ -21,15 +22,16 @@ function RenderDepartment({item}) {
 }
 
 function Department(props) {
+    console.log(props)
     const departmentList = props.departments.map((department) => {
         return (
-        <div className="col-12 col-md-6 col-lg-4 staff">
+        <div key={department.id} className="col-12 col-md-6 col-lg-4 staff">
             <RenderDepartment item={department} />
         </div>
         );
     })
-    return(
-        <div>
+    return(                
+        <div className="container container-content">
             <div className="row">
             <div className="col-12 ">
                 <h3 className="text-center">Phòng ban</h3>
