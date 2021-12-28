@@ -38,9 +38,7 @@ class Header extends Component {
                                 </NavItem>
                             </Nav>
                         </Collapse>
-                        <NavbarBrand className='mr-auto' href="/">
-                            <h5>Ứng dụng quản lý nhân sự V1.0</h5>
-                        </NavbarBrand>
+                        <h5 className='appName'>Ứng dụng quản lý nhân sự V1.0</h5>
                     </div>
                 </Navbar>
             </React.Fragment>

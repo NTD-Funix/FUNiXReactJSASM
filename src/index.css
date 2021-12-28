@@ -232,3 +232,7 @@ hr {
 .departmentImg {
   max-height: 180px;
 }
+
+.appName {
+  color: white;
+}
