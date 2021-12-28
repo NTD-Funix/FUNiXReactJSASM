@@ -10,6 +10,8 @@ import Footer from './FooterComponent';
 import { STAFFS, DEPARTMENTS, IMAGE } from '../shared/staffs';   
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+
+// Hàm chỉnh quản lý, truyền các state cho các component con của ứng dụng và điều hướng ứng dụng.
 class Main extends Component {                 
 
     constructor(props) {                           

@@ -5,6 +5,8 @@ import {Card, CardBody, CardTitle, CardText, CardImg,
         FormGroup, Label, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+
+// Hàm hiển thị bảng lương của từng nhân viên.
 function RenderStaff ({item}) {
     let department = item.department.id === "Dept01" ? "dept01" :
                     item.department.id === "Dept02" ? "antiquewhite" :
@@ -35,8 +37,9 @@ function RenderStaff ({item}) {
     );
 };
 
-function Salary(props) {
 
+// Hàm xử lý, sắp xếp và hiển thị thông tin bảng lương của toàn bộ nhân viên.
+function Salary(props) {
 
     const newStaffs = props.staffs.map((staff) => {
         const basicSalary = 3000000;

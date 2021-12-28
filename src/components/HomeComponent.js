@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+// Hàm hiển thị trang chủ.
 function Home(props) {
     return(
         <div>

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Card, CardBody, CardTitle, CardImg, InputGroup, FormGroup, Input} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+
+// Hàm hiển thị ảnh, Họ và tên, Mã NV của từng nhân viên.
 function RenderStaff ({item}) {
     return(
         <Card id={item.id} className="Dept01">
@@ -20,7 +22,7 @@ function RenderStaff ({item}) {
     );
 };
 
-
+// Hàm xử lý lọc nhân viên, sắp xếp nhân viên theo vị trí và hiển thị toàn bộ nhân viên.
 function Staffs(props) {
 
     const [search, setNewSearch] = useState('');

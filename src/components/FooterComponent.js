@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Hàm tạo chân trang.
 function Footer(props) {
     return (
         <div className="footer">

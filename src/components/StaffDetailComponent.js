@@ -3,6 +3,8 @@ import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardBody} from 'reactstrap';
 import dateFormat from 'dateformat';
 import { Link } from 'react-router-dom';
 
+
+// Hàm hiển thị thông tin chi tiết của nhân viên.
 function RenderStaff({staff}) {
     let doB = dateFormat(staff.doB, "dd/mm/yyyy");
     let startDate = dateFormat(staff.startDate, "dd/mm/yyyy");
@@ -50,6 +52,7 @@ function RenderStaff({staff}) {
     );
 }
 
+// Hàm xử lý và hiển thị thông tin chi tiết của nhân viên.
 const StaffDetail = (props) => {
     let staff = props.staff;
     if (staff != null) {

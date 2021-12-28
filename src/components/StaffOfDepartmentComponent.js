@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, CardBody, CardTitle, CardImg, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-
+// Hàm hiển thị từng nhân viên của phòng ban.
 function RenderStaffOfDep({item}) {
     let department = item.department.id === "Dept01" ? "dept01" :
                     item.department.id === "Dept02" ? "antiquewhite" :
@@ -21,6 +21,8 @@ function RenderStaffOfDep({item}) {
 
 }
 
+
+// Hàm xử lý và hiển thị tất cả các nhân viên của phòng ban.
 function StaffOfDepartment(props) {
     const list = props.items.map((item) => {
         return (

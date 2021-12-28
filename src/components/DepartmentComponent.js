@@ -2,6 +2,8 @@ import React from 'react';
 import {Card, CardBody, CardTitle, CardText, CardImg} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
+
+// Hàm hiển thị từng phòng ban.
 function RenderDepartment({item}) {
     let department = item.id === "Dept01" ? "dept01" :
                     item.id === "Dept02" ? "antiquewhite" :
@@ -21,6 +23,8 @@ function RenderDepartment({item}) {
     );
 }
 
+
+// Hàm xử lý và hiển thị tất cả các phòng ban.
 function Department(props) {
     const departmentList = props.departments.map((department) => {
         return (
