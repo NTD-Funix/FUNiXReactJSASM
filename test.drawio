@@ -1,0 +1,64 @@
+<mxfile host="65bd71144e">
+    <diagram id="2QbgbuGqJbJewVSnode0" name="Page-1">
+        <mxGraphModel dx="929" dy="683" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="7" value="LOGO" style="html=1;shadow=0;dashed=0;fillColor=#0085FC;strokeColor=none;fontSize=16;fontColor=#ffffff;align=left;spacing=15;" vertex="1" parent="1">
+                    <mxGeometry width="850" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Home" style="fillColor=none;strokeColor=none;fontSize=14;fontColor=#ffffff;align=center;" vertex="1" parent="7">
+                    <mxGeometry width="70" height="40" relative="1" as="geometry">
+                        <mxPoint x="110" y="20" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="Department" style="fillColor=none;strokeColor=none;fontSize=14;align=center;fontColor=#FFFFFF;" vertex="1" parent="7">
+                    <mxGeometry width="70" height="40" relative="1" as="geometry">
+                        <mxPoint x="190" y="20" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="Salary" style="fillColor=none;strokeColor=none;fontSize=14;align=center;spacingRight=0;fontColor=#FFFFFF;" vertex="1" parent="7">
+                    <mxGeometry width="80" height="40" relative="1" as="geometry">
+                        <mxPoint x="270" y="20" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="About" style="fillColor=none;strokeColor=none;fontSize=14;align=center;fontColor=#FFFFFF;" vertex="1" parent="7">
+                    <mxGeometry width="80" height="40" relative="1" as="geometry">
+                        <mxPoint x="350" y="20" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="12" value="Search" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;fontSize=14;fontColor=#ffffff;strokeColor=#ffffff;fillColor=none;" vertex="1" parent="7">
+                    <mxGeometry x="1" width="70" height="40" relative="1" as="geometry">
+                        <mxPoint x="-80" y="20" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" value="Search" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;fontSize=14;fontColor=#6C767D;strokeColor=#CED4DA;fillColor=#ffffff;align=left;spacing=10;" vertex="1" parent="7">
+                    <mxGeometry x="1" width="180" height="40" relative="1" as="geometry">
+                        <mxPoint x="-270" y="20" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="NEXT" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=#33A64C;strokeWidth=1;fillColor=none;fontColor=#33A64C;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="1">
+                    <mxGeometry x="380" y="530" width="90" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="&lt;font color=&quot;#000000&quot;&gt;THÔNG TIN NHÂN VIÊN 1&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="110" width="200" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="&lt;span&gt;&lt;font color=&quot;#000000&quot;&gt;THÔNG TIN NHÂN VIÊN 2&lt;/font&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="110" width="200" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="&lt;span&gt;&lt;font color=&quot;#000000&quot;&gt;THÔNG TIN NHÂN VIÊN 3&lt;/font&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="1">
+                    <mxGeometry x="560" y="110" width="200" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="&lt;span&gt;&lt;font color=&quot;#000000&quot;&gt;THÔNG TIN NHÂN VIÊN 4&lt;/font&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="320" width="200" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="&lt;span&gt;&lt;font color=&quot;#000000&quot;&gt;THÔNG TIN NHÂN VIÊN 5&lt;/font&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="320" width="200" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="&lt;span&gt;&lt;font color=&quot;#000000&quot;&gt;THÔNG TIN NHÂN VIÊN 6&lt;/font&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="1">
+                    <mxGeometry x="560" y="320" width="200" height="170" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

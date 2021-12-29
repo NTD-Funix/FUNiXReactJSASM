@@ -30,12 +30,12 @@ function RenderComment({comments}) {
 };
 
 
-    const Dishdetail = (props) => {
-        let dish = props.dish;
-        if (dish != null) {
-            return(
-                <div className="container">
-                    <div className="row">
+const Dishdetail = (props) => {
+    let dish = props.dish;
+    if (dish != null) {
+        return(
+            <div className="container">
+                <div className="row">
                     <Breadcrumb>
                         <BreadcrumbItem>
                         <Link to='/menu'>Menu</Link>
@@ -46,24 +46,24 @@ function RenderComment({comments}) {
                         <h3>{props.dish.name}</h3>
                         <hr/>
                     </div>
+                </div>
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderDish dish={dish}/>
                     </div>
-                    <div className="row">
-                        <div className="col-12 col-md-5 m-1">
-                            <RenderDish dish={dish}/>
-                        </div>
-                        <div className="col-12 col-md-5 m-1">
-                            <h3>Comments</h3>    
-                            <RenderComment comments={props.comments} />
-                        </div>
+                    <div className="col-12 col-md-5 m-1">
+                        <h3>Comments</h3>    
+                        <RenderComment comments={props.comments} />
                     </div>
                 </div>
-            );
+            </div>
+        );
 
-        }
-        else
-            return(
-                <div></div>
-            );
     }
+    else
+        return(
+            <div></div>
+        );
+}
 
 export default Dishdetail;
