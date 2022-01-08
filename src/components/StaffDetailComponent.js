@@ -37,7 +37,7 @@ function RenderStaff({staff}) {
                     </div>
                     <div className="input-group mb-1">
                         <span className="input-group-text">Phòng ban</span>
-                        <input type="text" className="form-control" value={staff.department.name} disabled />
+                        <input type="text" className="form-control" value={staff.department} disabled />
                     </div>
                     <div className="input-group mb-1">
                         <span className="input-group-text">Số ngày nghỉ còn lại</span>

@@ -4,10 +4,10 @@ import {Link} from 'react-router-dom';
 
 // Hàm hiển thị từng nhân viên của phòng ban.
 function RenderStaffOfDep({item}) {
-    let department = item.department.id === "Dept01" ? "dept01" :
-                    item.department.id === "Dept02" ? "antiquewhite" :
-                    item.department.id === "Dept03" ? "aqua" :
-                    item.department.id === "Dept04" ? "aquamarine" : "yellow";
+    let department = item.department === "Sale" ? "dept01" :
+                    item.department === "HR" ? "antiquewhite" :
+                    item.department === "Marketing" ? "aqua" :
+                    item.department === "IT" ? "aquamarine" : "yellow";
     return(
         <Card id={item.id} className="Dept01">
             <CardBody>

@@ -8,10 +8,10 @@ import { Link } from 'react-router-dom';
 
 // Hàm hiển thị bảng lương của từng nhân viên.
 function RenderStaff ({item}) {
-    let department = item.department.id === "Dept01" ? "dept01" :
-                    item.department.id === "Dept02" ? "antiquewhite" :
-                    item.department.id === "Dept03" ? "aqua" :
-                    item.department.id === "Dept04" ? "aquamarine" : "yellow";
+    let department = item.department === "Sale" ? "dept01" :
+                    item.department === "HR" ? "antiquewhite" :
+                    item.department === "Marketing" ? "aqua" :
+                    item.department === "IT" ? "aquamarine" : "yellow";
     return(
         <Card id={item.id}>
             <CardBody className={department}>
@@ -22,7 +22,7 @@ function RenderStaff ({item}) {
                         <CardImg src={item.image} alt={item.name}/>
                     </div>
                     <div className="col-8">
-                        <CardText>Phòng ban: {item.department.name}</CardText>
+                        <CardText>Phòng ban: {item.department}</CardText>
                         <CardText>Mã nhân viên: {item.id}</CardText>
                         <CardText>Hệ số lương: {item.salaryScale}</CardText>
                         <CardText>Số giờ làm thêm: {item.overTime}</CardText>
@@ -37,41 +37,31 @@ function RenderStaff ({item}) {
     );
 };
 
-
 // Hàm xử lý, sắp xếp và hiển thị thông tin bảng lương của toàn bộ nhân viên.
 function Salary(props) {
-
-    const newStaffs = props.staffs.map((staff) => {
-        const basicSalary = 3000000;
-        const overTimeSalary = 200000;
-        const salary = Math.floor((staff.salaryScale*basicSalary) + (overTimeSalary*staff.overTime));
-        staff.salary=salary;
-        return (
-            staff
-            );
-        });
-
-        const [sortValue, onSort] = useState('staffId');
+    const [sortValue, onSort] = useState('staffId');
+    if(props.staffs) {
     
         function onSortChange(e) {
             onSort(e.target.value);
         }; 
         
-    sortValue === "highToLow" ? newStaffs.sort((a,b)=> a.salary > b.salary ? -1 : 1) 
-    : sortValue === "lowToHigh" ? newStaffs.sort((a,b)=> a.salary > b.salary ? 1 : -1)
-    : sortValue === "department" ? newStaffs.sort((a,b) => a.department.name > b.department.name ? 1 : -1)
-    : sortValue === "nameAToZ" ? newStaffs.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
-    : sortValue === "nameZToA" ? newStaffs.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1)
-    : newStaffs.sort((a,b)=> a.id > b.id ? 1 : -1);
+        sortValue === "highToLow" ? props.staffs.sort((a,b)=> a.salary > b.salary ? -1 : 1) 
+        : sortValue === "lowToHigh" ? props.staffs.sort((a,b)=> a.salary > b.salary ? 1 : -1)
+        : sortValue === "department" ? props.staffs.sort((a,b) => a.department > b.department ? 1 : -1)
+        : sortValue === "nameAToZ" ? props.staffs.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+        : sortValue === "nameZToA" ? props.staffs.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1)
+        : props.staffs.sort((a,b)=> a.id > b.id ? 1 : -1);
     
-    const listRender = newStaffs.map((newStaff) =>{
-        return(
-            <div  key={newStaff.id}  className="col-12 col-md-6 col-lg-4 staff">
-                <RenderStaff item={newStaff} />
-            </div>
-        );
-    });
     
+        const listRender = props.staffs.map((staff) =>{
+            return(
+                <div  key={staff.id}  className="col-12 col-md-6 col-lg-4 staff">
+                    <RenderStaff item={staff} />
+                </div>
+            );
+        });
+
     return(
         <div className="container container-content">
             <div className="row">
@@ -116,6 +106,12 @@ function Salary(props) {
             </div>
         </div>
     );
+    } else {
+        return (
+            <div className="row">
+            </div>
+            );
+    }
 }
 
 export default Salary;

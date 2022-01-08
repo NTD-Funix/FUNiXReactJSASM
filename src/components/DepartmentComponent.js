@@ -4,19 +4,20 @@ import {Link} from 'react-router-dom';
 
 
 // Hàm hiển thị từng phòng ban.
-function RenderDepartment({item}) {
-    let department = item.id === "Dept01" ? "dept01" :
-                    item.id === "Dept02" ? "antiquewhite" :
-                    item.id === "Dept03" ? "aqua" :
-                    item.id === "Dept04" ? "aquamarine" : "yellow";
+function RenderDepartment({department}) {
+    let deptClass = department.id === "Dept01" ? "dept01" :
+                    department.id === "Dept02" ? "antiquewhite" :
+                    department.id === "Dept03" ? "aqua" :
+                    department.id === "Dept04" ? "aquamarine" : "yellow";
+
     return(
-        <Link to={`/departments/${item.id}`}>
-            <Card className={department}>
+        <Link to={`/departments/${department.name}`}>
+            <Card className={deptClass}>
                 <CardBody>
-                    <CardImg src={item.image} alt={item.name} className="departmentImg"/>
-                    <CardTitle>{item.name} Department</CardTitle>
-                    <CardTitle>ID: {item.id}</CardTitle>
-                    <CardText>Số lượng nhân viên: {item.numberOfStaff}</CardText>
+                    <CardImg src={department.image} alt={department.name} className="departmentImg"/>
+                    <CardTitle>{department.name} Department</CardTitle>
+                    <CardTitle>ID: {department.id}</CardTitle>
+                    <CardText>Số lượng nhân viên: {department.numberOfStaff}</CardText>
                 </CardBody>
             </Card>
         </Link>
@@ -29,7 +30,7 @@ function Department(props) {
     const departmentList = props.departments.map((department) => {
         return (
         <div key={department.id} className="col-12 col-md-6 col-lg-4 staff">
-            <RenderDepartment item={department} />
+            <RenderDepartment department={department}/>
         </div>
         );
     })

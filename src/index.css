@@ -81,11 +81,6 @@ code {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-.modal-dialog {
-  max-width: 83% !important;
-  height: auto;
-}
-
 .modal-header {
   text-transform: uppercase;
   justify-content: center;
@@ -235,4 +230,14 @@ hr {
 
 .appName {
   color: white;
+}
+
+.header-add {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.header-add button {
+  height: fit-content;
 }
