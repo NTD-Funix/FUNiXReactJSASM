@@ -19,8 +19,7 @@ class CommentForm extends Component {
     }
 
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values))
-        alert('Current State is: ' + JSON.stringify(values))
+        this.props.addComment(this.props.dishId, values.rating, values.yourName, values.comment);
     }
  
     handleToggleModal() {
@@ -32,7 +31,11 @@ class CommentForm extends Component {
     render() {
         return(
             <React.Fragment>
-                <RenderComment comments={this.props.comments} onClick={this.handleToggleModal}/>
+                <Button outline onClick={this.handleToggleModal}>
+                    <i className="fa fa-pencil"></i>
+                    {' '}
+                    Submit Comment
+                </Button>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.handleToggleModal}>
                     <ModalHeader toggle={this.handleToggleModal}>Submit Comment</ModalHeader>
                     <ModalBody>
@@ -100,7 +103,7 @@ function RenderDish({dish}) {
     );
 };
 
-function RenderComment({comments, onClick}) {
+function RenderComment({comments, addComment, dishId}) {
     let comment = comments.map((comment) => {
         let timeComment = new Intl.DateTimeFormat
         ('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)));
@@ -114,11 +117,10 @@ function RenderComment({comments, onClick}) {
     return (
         <div>
             {comment}
-            <Button outline onClick={onClick}>
-                <i className="fa fa-pencil"></i>
-                {' '}
-                Submit Comment
-            </Button>
+            <CommentForm 
+                addComment={addComment} 
+                dishId={dishId}
+            />
         </div>
     );
 };
@@ -147,7 +149,10 @@ const Dishdetail = (props) => {
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         <h3>Comments</h3>    
-                        <CommentForm comments={props.comments} />
+                        <RenderComment comments={props.comments}
+                            addComment={props.addComment}
+                            dishId={props.dish.id}
+                        />
                     </div>
                 </div>
             </div>
