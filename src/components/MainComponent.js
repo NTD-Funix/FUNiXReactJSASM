@@ -7,10 +7,15 @@ import Department from './DepartmentComponent';
 import StaffOfDepartment from './StaffOfDepartmentComponent';
 import Salary from './SalaryComponent';
 import Footer from './FooterComponent';
-import { IMAGE } from '../shared/staffs';   
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
 
-// var id = 0;
+
+const mapStateToProps = state => {
+    return {
+        image: state.image,
+    };
+};
 
 // Hàm chỉnh quản lý, truyền các state cho các component con của ứng dụng và điều hướng ứng dụng.
 class Main extends Component {                 
@@ -18,14 +23,12 @@ class Main extends Component {
     constructor(props) {                           
         super(props);      
         this.state = {           
-            staffs: [],
-            image: IMAGE  
+            staffs: [], 
         };
     };
 
 // Hàm lấy dữ liệu từ localStorage khi trang được load lại.
     componentWillMount() {
-        console.log(JSON.parse(localStorage.getItem('staffs')));
         if (localStorage && localStorage.getItem('staffs')){
             var staffs = JSON.parse(localStorage.getItem('staffs'));
             this.setState({
@@ -64,7 +67,7 @@ class Main extends Component {
     
     
     render() {  
-        
+
         let staffs = this.state.staffs;
 
         let departments = [
@@ -118,7 +121,7 @@ class Main extends Component {
             <div>
                 <Header/>
                     <Switch>
-                        <Route exact path="/home" component={() =><Home image={this.state.image} />} />
+                        <Route exact path="/home" component={() =><Home image={this.props.image} />} />
                         <Route exact path="/staffs" component={() => <Staffs staffs={staffs} handleSubmitAdd={this.handleSubmitAdd} />} />
                         <Route path="/staffs/:staffId" component={StaffWithId} />
                         <Route exact path="/departments" 
@@ -133,4 +136,4 @@ class Main extends Component {
     };
 };
 
-export default Main;
+export default withRouter(connect(mapStateToProps)(Main));
