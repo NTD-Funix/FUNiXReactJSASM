@@ -4,7 +4,8 @@ import { Card, CardImg, CardText, CardBody, CardTitle,
         Modal, ModalHeader, ModalBody, Label, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { LocalForm, Control, Errors } from 'react-redux-form';
-import { Loading } from './LoadingComponent'
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 const required = (val) => val && val.length;
 const minLength = (min) => (val) => (val) && (val.length >= min);
@@ -92,38 +93,56 @@ class CommentForm extends Component {
 }
 
 
-function RenderDish({dish}) {
-    return (
-        <Card>
-            <CardImg top src={dish.image} alt={dish.name} />
-            <CardBody>
-                <CardTitle>{dish.name}</CardTitle>
-                <CardText>{dish.description}</CardText>
-            </CardBody>
-        </Card>
-    );
+function RenderDish({dish, isLoading, errMess}) {
+    if(isLoading) {
+        return(
+            <Loading/>
+        );
+    }
+    else if (errMess) {
+        return(
+            <h4>{errMess}</h4>
+        );
+    }
+    else
+        return (
+            <Card>
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                <CardBody>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
+        );
 };
 
-function RenderComment({comments, addComment, dishId}) {
-    let comment = comments.map((comment) => {
-        let timeComment = new Intl.DateTimeFormat
-        ('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)));
-       return (
-        <div key={comment.id}>
-            <p>{comment.comment}</p>
-            <p>-- {comment.author}, {timeComment}</p>
-        </div>
-       ); 
-    });  
-    return (
-        <div>
-            {comment}
-            <CommentForm 
-                addComment={addComment} 
-                dishId={dishId}
-            />
-        </div>
-    );
+function RenderComment({comments, addComment, dishId, errMess}) {
+    if(errMess) {
+        return (
+            <h4>{errMess}</h4>
+        );
+    }
+    else {
+        let comment = comments.map((comment) => {
+            let timeComment = new Intl.DateTimeFormat
+            ('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)));
+            return (
+                <div key={comment.id}>
+                    <p>{comment.comment}</p>
+                    <p>-- {comment.author}, {timeComment}</p>
+                </div>
+            ); 
+        });  
+        return (
+            <div>
+                {comment}
+                <CommentForm 
+                    addComment={addComment} 
+                    dishId={dishId}
+                />
+            </div>
+        );
+    }
 };
 
 
@@ -165,11 +184,14 @@ const Dishdetail = (props) => {
                 </div>
                 <div className="row">
                     <div className="col-12 col-md-5 m-1">
-                        <RenderDish dish={props.dish}/>
+                        <RenderDish dish={props.dish}
+                                    isLoading={props.dishesLoading}
+                                    errMess={props.dishesErrMess}/>
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         <h3>Comments</h3>    
                         <RenderComment comments={props.comments}
+                            errMess={props.commentsErrMess}
                             addComment={props.addComment}
                             dishId={props.dish.id}
                         />

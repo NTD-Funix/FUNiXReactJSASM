@@ -7,7 +7,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addComment, fetchDishes } from '../redux/ActionCreators';
+import { addComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 
 const mapStateToProps = (state) => {
@@ -22,12 +22,18 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps =(dispatch) => ({
   addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
   fetchDishes: () => {dispatch(fetchDishes())},
+  fetchComments: () => {dispatch(fetchComments())},
+  fetchPromos: () => {dispatch(fetchPromos())},
+  fetchLeaders: () => {dispatch(fetchLeaders())},
   resetFeedbackForm: () => {dispatch(actions.reset('feedback'))}
 })
 class Main extends Component {
 
   componentDidMount() {
     this.props.fetchDishes();
+    this.props.fetchComments();
+    this.props.fetchPromos();
+    this.props.fetchLeaders();
   }
 
     render() {
@@ -41,8 +47,12 @@ class Main extends Component {
               <Home dish={dishes.dishes.filter((dish) => dish.featured)[0]}
                     dishesLoading={dishes.isLoading}
                     dishesErrMess={dishes.errMess}
-                    promotion={promotions.filter((promotion) => promotion.featured)[0]}
-                    leader={leaders.filter((leader) => leader.featured)[0]}
+                    promotion={promotions.promotions.filter((promotion) => promotion.featured)[0]}
+                    promosLoading={promotions.isLoading}
+                    promosErrMess={promotions.errMess}
+                    leader={leaders.leaders.filter((leader) => leader.featured)[0]}
+                    leadersLoading={leaders.isLoading}
+                    leadersErrMess={leaders.errMess}
               />
             );
         };
@@ -50,9 +60,10 @@ class Main extends Component {
         const DishWithId = ({match}) => {
           return(
             <Dishdetail dish={dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
-                        isLoading={dishes.isLoading}
-                        errMess={dishes.errMess}
-                        comments={comments.filter((comments) => comments.dishId === parseInt(match.params.dishId, 10))}
+                        dishesLoading={dishes.isLoading}
+                        dishesErrMess={dishes.errMess}
+                        comments={comments.comments.filter((comments) => comments.dishId === parseInt(match.params.dishId, 10))}
+                        commentsErrMess={comments.errMess}
                         addComment={this.props.addComment}
             />
           );
