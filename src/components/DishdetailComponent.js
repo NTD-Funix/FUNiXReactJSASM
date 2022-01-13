@@ -99,7 +99,7 @@ function RenderDish({dish, isLoading, errMess}) {
             <Loading/>
         );
     }
-    else if (errMess) {
+    else if(errMess) {
         return(
             <h4>{errMess}</h4>
         );
