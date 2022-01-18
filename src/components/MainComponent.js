@@ -9,110 +9,56 @@ import Salary from './SalaryComponent';
 import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
+import { fetchStaffs, fetchDepartments, postStaff, onDelete, fetchStaffsSalary, changeInfo } from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
-    return {
-        image: state.image,
+    return { 
+        staffs: state.staffs,
+        departments: state.departments,
+        homeImage: state.homeImage,
+        deptImages: state.deptImages,
+        staffsSalary: state.staffsSalary,
     };
 };
 
+const mapDispatchToProps = dispatch => ({
+    postStaff: (name, doB, startDate, departmentId, salaryScale, annualLeave, overTime) => dispatch(postStaff(name, doB, startDate, departmentId, salaryScale, annualLeave, overTime)),
+    fetchStaffs: () => {dispatch(fetchStaffs())},
+    onDelete: (staffId) => dispatch(onDelete(staffId)),
+    fetchDepartments: () => {dispatch(fetchDepartments())},
+    fetchStaffsSalary: () => {dispatch(fetchStaffsSalary())},
+    changeInfo: (staffId, name, doB, startDate, departmentId, salaryScale, annualLeave, overTime) => dispatch(changeInfo(staffId, name, doB, startDate, departmentId, salaryScale, annualLeave, overTime)),
+});
+
+
 // Hàm chỉnh quản lý, truyền các state cho các component con của ứng dụng và điều hướng ứng dụng.
-class Main extends Component {                 
+class Main extends Component {    
 
-    constructor(props) {                           
-        super(props);      
-        this.state = {           
-            staffs: [], 
-        };
-    };
-
-// Hàm lấy dữ liệu từ localStorage khi trang được load lại.
-    componentWillMount() {
-        if (localStorage && localStorage.getItem('staffs')){
-            var staffs = JSON.parse(localStorage.getItem('staffs'));
-            this.setState({
-                staffs: staffs,
-            });
-        };
-    };
-    
-// Hàm tạo ID duy nhất theo thứ tự tăng dần 1 đơn vị
-    GenerateID() {
-        let id = this.state.staffs.length;
-        return id += 1;
-    };
-
-// Hàm nhận dữ liệu newStaff từ Staffs Component và xử lý dữ liệu lưu vào localStorage
-    handleSubmitAdd = (data) => {
-        var staffs=this.state.staffs;
-        var newStaff = {
-            id: this.GenerateID(),
-            name: data.name,
-            doB: data.doB,
-            salaryScale: data.salaryScale,
-            startDate: data.startDate,
-            department: data.department,
-            annualLeave: data.annualLeave,
-            overTime: data.overTime,
-            salary: 3000000*data.salaryScale + 200000*data.overTime,
-            image: '/assets/images/alberto.png',
-        };
-        staffs.push(newStaff);
-        this.setState({
-            staffs: staffs,
-        });
-        localStorage.setItem('staffs', JSON.stringify(staffs));
-    };
-    
+    componentDidMount() {
+        this.props.fetchStaffs();
+        this.props.fetchDepartments();
+        this.props.fetchStaffsSalary();
+    }
     
     render() {  
 
-        let staffs = this.state.staffs;
-
-        let departments = [
-            {
-                id: "Dept01",
-                name: "Sale",
-                numberOfStaff: (staffs.filter((staff) => staff.department === "Sale")).length,
-                image: '/assets/images/sale-department.png'
-            },
-            {
-                id: "Dept02",
-                name: "HR",
-                numberOfStaff: (staffs.filter((staff) => staff.department === "HR")).length,
-                image: '/assets/images/hr-department.jpg'
-            },
-            {
-                id: "Dept03",
-                name: "Marketing",
-                numberOfStaff: (staffs.filter((staff) => staff.department === "Marketing")).length,
-                image: '/assets/images/marketing-department.jpg'
-            },
-            {
-                id: "Dept04",
-                name: "IT",
-                numberOfStaff: (staffs.filter((staff) => staff.department === "IT")).length,
-                image: '/assets/images/it-department.png'
-            },
-            {
-                id: "Dept05",
-                name: "Finance",
-                numberOfStaff: (staffs.filter((staff) => staff.department === "Finance")).length,
-                image: '/assets/images/finance-department.jpg'
-             }
-        ];
+        const staffs = this.props.staffs.staffs;
+        const departments = this.props.departments.departments;
+        const staffsSalary = this.props.staffsSalary.staffsSalary;
         
         const StaffWithId = ({match}) => {
             return (
-                <StaffDetail staff={staffs.find((staff) => parseInt(staff.id, 10) === parseInt(match.params.staffId, 10))}/>
+                <StaffDetail staff={staffs.find((staff) => parseInt(staff.id, 10) === parseInt(match.params.staffId, 10))}
+                            departments = {departments} changeInfo={this.props.changeInfo}
+                />
             );
         };
 
         const StaffOfDept = ({match}) => {
             return(
-                <StaffOfDepartment items={staffs.filter((item) => item.department === match.params.department)}
-                            department={departments.find((item) => item.name === match.params.department)}
+                <StaffOfDepartment items={staffs.filter((item) => item.departmentId === match.params.departmentId)}
+                            department={departments.find((item) => item.id === match.params.departmentId)}
                 />
             );
         };
@@ -121,13 +67,16 @@ class Main extends Component {
             <div>
                 <Header/>
                     <Switch>
-                        <Route exact path="/home" component={() =><Home image={this.props.image} />} />
-                        <Route exact path="/staffs" component={() => <Staffs staffs={staffs} handleSubmitAdd={this.handleSubmitAdd} />} />
+                        <Route exact path="/home" component={() =><Home image={this.props.homeImage} />} />
+                        <Route exact path="/staffs" component={() => <Staffs staffs={staffs} 
+                                                                        postStaff={this.props.postStaff}
+                                                                        onDelete={this.props.onDelete}
+                                                                        />}/>
                         <Route path="/staffs/:staffId" component={StaffWithId} />
                         <Route exact path="/departments" 
-                            component={() => <Department departments={departments}/>} /> 
-                        <Route path="/departments/:department" component={StaffOfDept}/> 
-                        <Route exact path="/salary" component={() => <Salary staffs={staffs}/>}/> 
+                            component={() => <Department departments={departments} deptImages={this.props.deptImages}/>} /> 
+                        <Route path="/departments/:departmentId" component={StaffOfDept}/> 
+                        <Route exact path="/salary" component={() => <Salary staffsSalary={staffsSalary}/>}/> 
                         <Redirect to='/home'/>
                     </Switch>
                 <Footer/>
@@ -136,4 +85,4 @@ class Main extends Component {
     };
 };
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

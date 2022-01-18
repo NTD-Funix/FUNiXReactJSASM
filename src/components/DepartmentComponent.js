@@ -4,17 +4,18 @@ import {Link} from 'react-router-dom';
 
 
 // Hàm hiển thị từng phòng ban.
-function RenderDepartment({department}) {
+function RenderDepartment({department, deptImages}) {
     let deptClass = department.id === "Dept01" ? "dept01" :
                     department.id === "Dept02" ? "antiquewhite" :
                     department.id === "Dept03" ? "aqua" :
                     department.id === "Dept04" ? "aquamarine" : "yellow";
+    let DeptImg = deptImages.find((deptImage) => deptImage.id === department.id);
 
     return(
-        <Link to={`/departments/${department.name}`}>
+        <Link to={`/departments/${department.id}`}>
             <Card className={deptClass}>
                 <CardBody>
-                    <CardImg src={department.image} alt={department.name} className="departmentImg"/>
+                    <CardImg src={DeptImg.img} alt={department.name} className="departmentImg"/>
                     <CardTitle>{department.name} Department</CardTitle>
                     <CardTitle>ID: {department.id}</CardTitle>
                     <CardText>Số lượng nhân viên: {department.numberOfStaff}</CardText>
@@ -30,7 +31,7 @@ function Department(props) {
     const departmentList = props.departments.map((department) => {
         return (
         <div key={department.id} className="col-12 col-md-6 col-lg-4 staff">
-            <RenderDepartment department={department}/>
+            <RenderDepartment department={department} deptImages={props.deptImages}/>
         </div>
         );
     })

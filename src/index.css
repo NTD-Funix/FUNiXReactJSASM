@@ -46,6 +46,7 @@ code {
 
 .dept01 {
   background-color: #b0c9df;
+  position: relative;
 }
 
 .antiquewhite {
@@ -240,4 +241,19 @@ hr {
 
 .header-add button {
   height: fit-content;
+}
+
+.hide-show-btn {
+  display: none;
+  position: absolute;
+  top: 58%;
+  left: 15%;
+}
+
+.card:hover .hide-show-btn {
+  display: block;
+}
+
+.card:hover {
+  box-shadow: none;
 }

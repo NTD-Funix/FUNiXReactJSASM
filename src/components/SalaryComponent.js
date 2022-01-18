@@ -5,13 +5,17 @@ import {Card, CardBody, CardTitle, CardText, CardImg,
         FormGroup, Label, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-
 // Hàm hiển thị bảng lương của từng nhân viên.
-function RenderStaff ({item}) {
-    let department = item.department === "Sale" ? "dept01" :
-                    item.department === "HR" ? "antiquewhite" :
-                    item.department === "Marketing" ? "aqua" :
-                    item.department === "IT" ? "aquamarine" : "yellow";
+function RenderStaff ({item, staffsSalary}) {
+    let department = item.departmentId === "Dept01" ? "dept01" :
+                    item.departmentId === "Dept02" ? "antiquewhite" :
+                    item.departmentId === "Dept03" ? "aqua" :
+                    item.departmentId === "Dept04" ? "aquamarine" : "yellow";
+    let departmentName = item.departmentId === "Dept01" ? "Sale" :
+                        item.departmentId === "Dept02" ? "HR" :
+                        item.departmentId === "Dept03" ? "Marketing" :
+                        item.departmentId === "Dept04" ? "IT" : "Finance"; 
+ 
     return(
         <Card id={item.id}>
             <CardBody className={department}>
@@ -22,8 +26,8 @@ function RenderStaff ({item}) {
                         <CardImg src={item.image} alt={item.name}/>
                     </div>
                     <div className="col-8">
-                        <CardText>Phòng ban: {item.department}</CardText>
-                        <CardText>Mã nhân viên: {item.id}</CardText>
+                        <CardText>Phòng ban: {departmentName}</CardText>
+                        <CardText>Mã nhân viên: {staffsSalary.indexOf(item)}</CardText>
                         <CardText>Hệ số lương: {item.salaryScale}</CardText>
                         <CardText>Số giờ làm thêm: {item.overTime}</CardText>
                     </div>
@@ -40,24 +44,22 @@ function RenderStaff ({item}) {
 // Hàm xử lý, sắp xếp và hiển thị thông tin bảng lương của toàn bộ nhân viên.
 function Salary(props) {
     const [sortValue, onSort] = useState('staffId');
-    if(props.staffs) {
-    
+    if(props.staffsSalary) {
         function onSortChange(e) {
             onSort(e.target.value);
         }; 
         
-        sortValue === "highToLow" ? props.staffs.sort((a,b)=> a.salary > b.salary ? -1 : 1) 
-        : sortValue === "lowToHigh" ? props.staffs.sort((a,b)=> a.salary > b.salary ? 1 : -1)
-        : sortValue === "department" ? props.staffs.sort((a,b) => a.department > b.department ? 1 : -1)
-        : sortValue === "nameAToZ" ? props.staffs.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
-        : sortValue === "nameZToA" ? props.staffs.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1)
-        : props.staffs.sort((a,b)=> a.id > b.id ? 1 : -1);
+        sortValue === "highToLow" ? props.staffsSalary.sort((a,b)=> a.salary > b.salary ? -1 : 1) 
+        : sortValue === "lowToHigh" ? props.staffsSalary.sort((a,b)=> a.salary > b.salary ? 1 : -1)
+        : sortValue === "department" ? props.staffsSalary.sort((a,b) => a.department > b.department ? 1 : -1)
+        : sortValue === "nameAToZ" ? props.staffsSalary.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+        : sortValue === "nameZToA" ? props.staffsSalary.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1)
+        : props.staffsSalary.sort((a,b)=> a.id > b.id ? 1 : -1);
     
-    
-        const listRender = props.staffs.map((staff) =>{
+        const listRender = props.staffsSalary.map((staffSalary) =>{
             return(
-                <div  key={staff.id}  className="col-12 col-md-6 col-lg-4 staff">
-                    <RenderStaff item={staff} />
+                <div  key={staffSalary.id}  className="col-12 col-md-6 col-lg-4 staff">
+                    <RenderStaff item={staffSalary} staffsSalary={props.staffsSalary}/>
                 </div>
             );
         });

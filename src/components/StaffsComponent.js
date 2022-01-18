@@ -19,15 +19,9 @@ class FormComponent extends Component {
         super(props)
         this.state={
             isModalOpen: false,
-            id: '',
-            name: '',
             doB: '',
-            salaryScale: 1.0,
             startDate: '',
-            department: 'Sale',
-            annualLeave: 0,
-            overTime: 0,
-            salary: '',
+            department: 'Dept01',
             searchValue: ''
         }
         this.handleSubmitSearch = this.handleSubmitSearch.bind(this);
@@ -62,13 +56,23 @@ class FormComponent extends Component {
     }
 
 // Hàm xử lý Submit Controlled Form (Form THêm nhân viên)
-    handleSubmitAdd() {
-        this.props.handleSubmitAdd(this.state);
+    handleSubmitAdd(values) {
+        const name = values.name;
+        const doB  = values.doB;
+        const startDate = values.startDate;
+        const departmentId = values.departmentId;
+        const salaryScale = values.salaryScale;
+        const annualLeave = values.annualLeave ;
+        const overTime = values.overTime;
+        this.props.postStaff(name, doB, startDate, departmentId, salaryScale, annualLeave, overTime);
     };
+
+    onDelete(staffId) {
+        this.props.onDelete(staffId);
+    }
 
 // Hiển thị ra view của component FormComponent
     render() {
-        console.log(this.props.staffs)
         if(this.props.staffs){
             const filtered = !this.state.searchValue
                 ? this.props.staffs 
@@ -78,7 +82,8 @@ class FormComponent extends Component {
             var list = filtered.map((staff) => {
                 return (
                     <div  key={staff.id}  className="col-6 col-md-4 col-lg-2 staff">
-                        <RenderStaff item={staff} />
+                        <RenderStaff item={staff} onDelete = { (staffId) => this.onDelete(staffId)}
+                                    staffs={this.props.staffs} />
                     </div>
                 );
             });
@@ -123,7 +128,6 @@ class FormComponent extends Component {
                                     <Control.text model=".name" id="name" name="name" 
                                         placeholder="Nhập họ tên nhân viên"
                                         className='form-control'
-                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
                                         validators={{
                                             required, minLength: minLength(3), maxLength: maxLength(30)
                                         }}
@@ -185,16 +189,16 @@ class FormComponent extends Component {
                             <Row className='form-group'>
                                 <Label htmlFor="department" md={4}>Phòng ban</Label>
                                 <Col md={8}>
-                                    <Control.select model=".department" name="department" id="department"
+                                    <Control.select model=".departmentId" name="departmentId" id="departmentId"
                                                     className="form-control"
-                                                    defaultValue='Sale'
+                                                    defaultValue='Dept01'
                                                     onChange={(modelValue) => this.handleInputChange(modelValue)}
                                                     >
-                                        <option>Sale</option>
-                                        <option>Marketing</option>
-                                        <option>Finance</option>
-                                        <option>HR</option>
-                                        <option>IT</option>
+                                        <option value="Dept01">Sale</option>
+                                        <option value="Dept03">Marketing</option>
+                                        <option value="Dept05">Finance</option>
+                                        <option value="Dept02">HR</option>
+                                        <option value="Dept04">IT</option>
                                     </Control.select>
                                 </Col>
                             </Row>
@@ -206,7 +210,6 @@ class FormComponent extends Component {
                                         placeholder="1.0 đến 3.0"
                                         className="form-control"
                                         defaultValue={1.0}
-                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
                                         validators={{
                                             isNumber, salaryScaleValid,
                                         }}
@@ -229,7 +232,6 @@ class FormComponent extends Component {
                                         placeholder="1.0"
                                         className='form-control'
                                         defaultValue={0}
-                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
                                     />
                                 </Col>
                             </Row>
@@ -240,13 +242,12 @@ class FormComponent extends Component {
                                         placeholder="1.0"
                                         className='form-control'
                                         defaultValue={0}
-                                        onChange={(modelValue) => this.handleInputChange(modelValue)}
                                     />
                                 </Col>
                             </Row>
                             <hr/>
                             <Row className='form-group m-1'>
-                                <Button type="submit" color="primary">
+                                <Button type="submit" value='submit' color="primary">
                                     Thêm
                                 </Button>
                             </Row>
@@ -259,20 +260,24 @@ class FormComponent extends Component {
 }
 
 // Hàm hiển thị ảnh, Họ và tên, Mã NV của từng nhân viên.
-function RenderStaff ({item}) {
+function RenderStaff ({staffs, item, onDelete}) {
     return(
         <Card id={item.id} className="Dept01">
-            <Link to={`/staffs/${item.id}`}>
-                <CardBody>
-                    <CardImg src={item.image} alt={item.name}/>
-                    <CardTitle tag="p">
-                        {item.name}
-                    </CardTitle>
-                    <CardTitle tag="p">
-                        Mã NV: {item.id}
-                    </CardTitle>
-                </CardBody>
-            </Link>
+            <CardBody>
+                <CardImg src={item.image} alt={item.name}/>
+                <CardTitle tag="p">
+                    {item.name}
+                </CardTitle>
+                <CardTitle tag="p">
+                    Mã NV: {staffs.indexOf(item)}
+                </CardTitle>
+                <div className="hide-show-btn">
+                    <Link to={`/staffs/${item.id}`}>
+                        <Button color="primary m-2" size="sm">Chi tiết</Button>
+                    </Link>
+                    <Button color="danger" size="sm" onClick = {() => {onDelete(item.id)}}>Xóa</Button>
+                </div>
+            </CardBody>
         </Card>
     );
 };
@@ -284,7 +289,8 @@ function Staffs(props) {
         <div className="container container-content">
             <FormComponent 
                 staffs={props.staffs}
-                handleSubmitAdd={(data) => props.handleSubmitAdd(data)}
+                postStaff={props.postStaff}
+                onDelete={props.onDelete}
             />
         </div>
     );
