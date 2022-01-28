@@ -27,34 +27,34 @@ function RenderStaff({staff, departments, onChangeInfo }) {
                 </Card>
             </div>
             <div className="col-12 col-md-8 col-lg-9 p-3">
-                    <div className="input-group mb-1">
-                        <span className="input-group-text">Họ và tên</span>
-                        <input type="text" className="form-control" placeholder="Username" name="usrname" value={staff.name} disabled />
-                    </div>
-                    <div className="input-group mb-1">
-                        <span className="input-group-text">Vị trí</span>
-                        <input type="text" className="form-control" value={position} disabled />
-                    </div>
-                    <div className="input-group mb-1">
-                        <span className="input-group-text">Ngày sinh</span>
-                        <input type="text" className="form-control" value={doB} disabled />
-                    </div>
-                    <div className="input-group mb-1">
-                        <span className="input-group-text">Ngày vào công ty</span>
-                        <input type="text" className="form-control" value={startDate} disabled />
-                    </div>
-                    <div className="input-group mb-1">
-                        <span className="input-group-text">Phòng ban</span>
-                        <input type="text" className="form-control" value={departmentName} disabled />
-                    </div>
-                    <div className="input-group mb-1">
-                        <span className="input-group-text">Số ngày nghỉ còn lại</span>
-                        <input type="text" className="form-control" value={staff.annualLeave} disabled />
-                    </div>
-                    <div className="input-group mb-1">
-                        <span className="input-group-text">Số ngày đã làm thêm</span>
-                        <input type="text" className="form-control" value={staff.overTime} disabled />
-                    </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Họ và tên</span>
+                    <input type="text" className="form-control" placeholder="Username" name="usrname" value={staff.name} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Vị trí</span>
+                    <input type="text" className="form-control" value={position} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Ngày sinh</span>
+                    <input type="text" className="form-control" value={doB} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Ngày vào công ty</span>
+                    <input type="text" className="form-control" value={startDate} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Phòng ban</span>
+                    <input type="text" className="form-control" value={departmentName} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Số ngày nghỉ còn lại</span>
+                    <input type="text" className="form-control" value={staff.annualLeave} disabled />
+                </div>
+                <div className="input-group mb-1">
+                    <span className="input-group-text">Số ngày đã làm thêm</span>
+                    <input type="text" className="form-control" value={staff.overTime} disabled />
+                </div>
             </div>
         </div>
     );
@@ -63,9 +63,7 @@ function RenderStaff({staff, departments, onChangeInfo }) {
 // Hàm xử lý và hiển thị thông tin chi tiết của nhân viên.
 const StaffDetail = (props) => {
     let staff = props.staff;
-    let defaultDoB = dateFormat(staff.doB, "yyyy-mm-dd");
-    let defautlStartDate = dateFormat(staff.startDate, "yyyy-mm-dd");
-
+    
     // Validate Form
     const required = (val) => val !== '';
     const minLength = (min) => (val) => !(val) || (val.length >= min);
@@ -74,8 +72,8 @@ const StaffDetail = (props) => {
     const salaryScaleValid = (val) => Number(val) >= 1.0 && Number(val) <= 3.0;
 
     const [ isModalOpen, setToggleModal ] = useState(false);
-    const [ doBValue, setDoB ] = useState(dateFormat(staff.doB, "yyyy-mm-dd"));
-    const [ startDateValue, setStartDate ] = useState(dateFormat(staff.startDate, "yyyy-mm-dd"));
+    const [ doB, setDoB ] = useState(dateFormat(props.staff.doB, "yyyy-mm-dd"));
+    const [ startDate, setStartDate ] = useState(dateFormat(props.staff.startDate, "yyyy-mm-dd"));
     
     function handleToggleModal () {
         setToggleModal(!isModalOpen);
@@ -95,6 +93,9 @@ const StaffDetail = (props) => {
         else if(name === 'startDate') {
             setStartDate(value);
         }
+        // setDoB([name], value);
+        // setStartDate([name], value);
+
     };
 
    function onSubmit(values) {
@@ -119,7 +120,7 @@ const StaffDetail = (props) => {
                         <h3>Thông tin cơ bản</h3>
                     </div>
                 </div> 
-                <RenderStaff staff={staff} departments={props.departments} onChangeInfo={onChangeInfo}/>
+                <RenderStaff staff={staff} departments={props.departments.departments} onChangeInfo={onChangeInfo}/>
                 <Modal isOpen={isModalOpen} toggle={handleToggleModal}>
                     <ModalHeader toggle={handleToggleModal}>Cập nhật thông tin</ModalHeader>
                     <ModalBody>
@@ -152,8 +153,8 @@ const StaffDetail = (props) => {
                                 <Col md={8}>
                                     <Control type='date' model=".doB" id="doB" name="doB"
                                         className='form-control'
-                                        defaultValue={defaultDoB}
-                                        value={doBValue}
+                                        defaultValue={doB}
+                                        value={doB}
                                         onChange={(modelValue) => handleInputChange(modelValue)}
                                         validators={{
                                             required,
@@ -173,8 +174,8 @@ const StaffDetail = (props) => {
                                 <Label htmlFor="startDate" md={4}>Ngày vào công ty</Label>
                                 <Col md={8}>
                                     <Control type="date" model='.startDate' id="startDate" name="startDate" 
-                                        defaultValue={defautlStartDate}
-                                        value={startDateValue}
+                                        defaultValue={startDate}
+                                        value={startDate}
                                         className='form-control'
                                         onChange={(modelValue) => handleInputChange(modelValue)}
                                         validators={{

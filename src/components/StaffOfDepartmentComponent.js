@@ -21,14 +21,14 @@ function RenderStaffOfDep({item}) {
 
 }
 
-
 // Hàm xử lý và hiển thị tất cả các nhân viên của phòng ban.
 function StaffOfDepartment(props) {
+    console.log(props.department)
     const list = props.items.map((item) => {
         return (
-        <div key={item.id} className="col-6 col-md-4 col-lg-2 staff">
-            <RenderStaffOfDep item={item} />
-        </div>
+            <div key={item.id} className="col-6 col-md-4 col-lg-2 staff">
+                <RenderStaffOfDep item={item} />
+            </div>
         );
     })
     return(

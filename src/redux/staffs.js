@@ -7,7 +7,8 @@ export const Staffs = (state = {
     }, action) => {
         switch(action.type) {
             case ActionTypes.ADD_STAFF:
-                return {...state, staffs: state.staffs.concat(action.payload)}
+                return {...state, isLoading: false, errMess: null, staffs: state.staffs.concat(action.payload)}
+                
             case ActionTypes.STAFFS_LOADING:
                 return {...state, isLoading: true, errMess: null, staffs: []};
                 

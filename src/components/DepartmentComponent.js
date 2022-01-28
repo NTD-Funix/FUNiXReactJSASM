@@ -1,7 +1,8 @@
 import React from 'react';
 import {Card, CardBody, CardTitle, CardText, CardImg} from 'reactstrap';
 import {Link} from 'react-router-dom';
-
+import {Loading} from './LoadingComponent';
+import { FadeTransform } from 'react-animation-components';
 
 // Hàm hiển thị từng phòng ban.
 function RenderDepartment({department, deptImages}) {
@@ -13,6 +14,8 @@ function RenderDepartment({department, deptImages}) {
 
     return(
         <Link to={`/departments/${department.id}`}>
+        <FadeTransform in
+                        transformProps={{exitTransForm: 'scale(0.5) translateY(-50%)'}}>
             <Card className={deptClass}>
                 <CardBody>
                     <CardImg src={DeptImg.img} alt={department.name} className="departmentImg"/>
@@ -21,20 +24,35 @@ function RenderDepartment({department, deptImages}) {
                     <CardText>Số lượng nhân viên: {department.numberOfStaff}</CardText>
                 </CardBody>
             </Card>
+        </FadeTransform>
         </Link>
     );
 }
 
-
 // Hàm xử lý và hiển thị tất cả các phòng ban.
 function Department(props) {
-    const departmentList = props.departments.map((department) => {
+    const departmentList = props.departments.departments.map((department) => {
         return (
         <div key={department.id} className="col-12 col-md-6 col-lg-4 staff">
             <RenderDepartment department={department} deptImages={props.deptImages}/>
         </div>
         );
-    })
+    });
+    
+    if (props.departments.isLoading === true) {
+        return (
+            <div className="container container-content p-4 text-center">
+                <Loading/>
+            </div>
+        );
+    }
+    else if (props.departments.errMess) {
+        return(
+            <div className="container container-content p-4 text-center">
+                <h4>{props.departments.errMess}</h4>
+            </div>
+        );
+    } else
     return(                
         <div className="container container-content">
             <div className="row">

@@ -5,6 +5,9 @@ import {Card, CardBody, CardTitle, CardImg,
         Modal, ModalHeader, ModalBody} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {LocalForm, Control, Errors} from 'react-redux-form';
+import { Loading } from './LoadingComponent';
+import { FadeTransform } from 'react-animation-components';
+
 
 // Validate Form
 const required = (val) => val;
@@ -21,7 +24,6 @@ class FormComponent extends Component {
             isModalOpen: false,
             doB: '',
             startDate: '',
-            department: 'Dept01',
             searchValue: ''
         }
         this.handleSubmitSearch = this.handleSubmitSearch.bind(this);
@@ -39,11 +41,11 @@ class FormComponent extends Component {
 
 // Hàm đóng/ mở Form Thêm nhân viên
     handleToggleModal() {
-        this.setState({
-            isModalOpen: !this.state.isModalOpen,
-        });
+            this.setState({
+                isModalOpen: !this.state.isModalOpen,
+            })
     };
-
+    
 // Hàm xử lý, lấy dữ liệu đầu vào Controlled Form (Form Thêm nhân viên).
     handleInputChange(values) {
         const target = values.target;
@@ -57,14 +59,7 @@ class FormComponent extends Component {
 
 // Hàm xử lý Submit Controlled Form (Form THêm nhân viên)
     handleSubmitAdd(values) {
-        const name = values.name;
-        const doB  = values.doB;
-        const startDate = values.startDate;
-        const departmentId = values.departmentId;
-        const salaryScale = values.salaryScale;
-        const annualLeave = values.annualLeave ;
-        const overTime = values.overTime;
-        this.props.postStaff(name, doB, startDate, departmentId, salaryScale, annualLeave, overTime);
+        this.props.postStaff(values.name, values.doB, values.startDate, values.departmentId, values.salaryScale, values.annualLeave, values.overTime);
     };
 
     onDelete(staffId) {
@@ -83,7 +78,7 @@ class FormComponent extends Component {
                 return (
                     <div  key={staff.id}  className="col-6 col-md-4 col-lg-2 staff">
                         <RenderStaff item={staff} onDelete = { (staffId) => this.onDelete(staffId)}
-                                    staffs={this.props.staffs} />
+                                    staffs={this.props.staffs}/>
                     </div>
                 );
             });
@@ -248,7 +243,7 @@ class FormComponent extends Component {
                             <hr/>
                             <Row className='form-group m-1'>
                                 <Button type="submit" value='submit' color="primary">
-                                    Thêm
+                                   Thêm
                                 </Button>
                             </Row>
                         </LocalForm>
@@ -260,37 +255,54 @@ class FormComponent extends Component {
 }
 
 // Hàm hiển thị ảnh, Họ và tên, Mã NV của từng nhân viên.
-function RenderStaff ({staffs, item, onDelete}) {
+function RenderStaff ({ staffs, item, onDelete }) {
     return(
-        <Card id={item.id} className="Dept01">
-            <CardBody>
-                <CardImg src={item.image} alt={item.name}/>
-                <CardTitle tag="p">
-                    {item.name}
-                </CardTitle>
-                <CardTitle tag="p">
-                    Mã NV: {staffs.indexOf(item)}
-                </CardTitle>
-                <div className="hide-show-btn">
-                    <Link to={`/staffs/${item.id}`}>
-                        <Button color="primary m-2" size="sm">Chi tiết</Button>
-                    </Link>
-                    <Button color="danger" size="sm" onClick = {() => {onDelete(item.id)}}>Xóa</Button>
-                </div>
-            </CardBody>
-        </Card>
+        <FadeTransform in
+                        transformProps={{exitTransForm: 'scale(0.5) translateY(-50%)'}}>
+            <Card id={item.id} className="Dept01">
+                <CardBody>
+                    <CardImg src={item.image} alt={item.name}/>
+                    <CardTitle tag="p">
+                        {item.name}
+                    </CardTitle>
+                    <CardTitle tag="p">
+                        Mã NV: {staffs.indexOf(item)}
+                    </CardTitle>
+                    <div className="hide-show-btn">
+                        <Link to={`/staffs/${item.id}`}>
+                            <Button color="primary m-2" size="sm">Chi tiết</Button>
+                        </Link>
+                        <Button color="danger" size="sm" onClick = {() => {onDelete(item.id)}}>Xóa</Button>
+                    </div>
+                </CardBody>
+            </Card>
+        </FadeTransform>
     );
 };
 
 // Hàm xử lý lọc nhân viên, sắp xếp nhân viên theo vị trí và hiển thị toàn bộ nhân viên.
 function Staffs(props) {
-
+    if (props.staffs.isLoading === true) {
+        return (
+            <div className="container container-content p-4 text-center">
+                <Loading/>
+            </div>
+        );
+    }
+    else if (props.staffs.errMess) {
+        return(
+            <div className="container container-content p-4 text-center">
+                <h4>{props.staffs.errMess}</h4>
+            </div>
+        );
+    } else
     return(
         <div className="container container-content">
             <FormComponent 
-                staffs={props.staffs}
+                staffs={props.staffs.staffs}
                 postStaff={props.postStaff}
                 onDelete={props.onDelete}
+                changeInfo={props.changeInfo}
             />
         </div>
     );
